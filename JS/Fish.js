@@ -6,20 +6,26 @@ class Fish {
     this.w = w;
     this.h = h;
     this.color = color;
+    this.startingAngle = this.randomAngle()
     this.direction = {
-      x: Math.random() * 2 - 1,
-      y: Math.random() * 2 - 1
+      x: Math.sin(this.startingAngle),
+      y: -Math.cos(this.startingAngle),
     }
   }
   newRandomDirection() {
-    this.direction = {
-      x: Math.random() * 2 - 1,
-      y: Math.random() * 2 - 1
-    }
+    let angle = this.randomAngle();
+    this.direction.y = -Math.cos(angle);
+    this.direction.x = Math.sin(angle);
+
   }
   move() {
     this.x += this.direction.x;
     this.y += this.direction.y;
+    console.log(this.direction)
+  }
+  randomAngle(){
+    let angle = Math.floor(Math.random()*360)*Math.PI/180;
+    return angle;
   }
 
 }
