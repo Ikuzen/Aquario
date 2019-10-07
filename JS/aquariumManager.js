@@ -18,16 +18,22 @@ class aquariumManager {
     }
     this.bounds = this.playScreen.getBoundingClientRect();
   }
-
+  ///
   // generation functions
+  ///
+  
   generateAquarium(){
     this.playScreen.style.backgroundImage = "url(assets/images/aquarium-background.jpg)"
     console.log("loaded background")
   }
   generateFish() {
-    this.fishArray.push(new Fish(this.tempMousePos.x-this.bounds.x-20, this.tempMousePos.y-this.bounds.y-20, 40, 40, this.colors["red"]))
+    this.fishArray.push(new Fish(this.tempMousePos.x-this.bounds.x-7.5, this.tempMousePos.y-this.bounds.y-7.5, 15, 15, this.colors["red"]))
     console.log(this.fishArray)
   }
+
+  ///
+  /// Display functions
+  ///
   drawAllFishes(){ // as rectangle shapes
     for(let i=0;i<this.fishArray.length;i++){
       this.image.fillStyle = this.fishArray[i].colors;
@@ -36,10 +42,9 @@ class aquariumManager {
         this.fishArray[i].y,
         this.fishArray[i].w,
         this.fishArray[i].h)
-        this.fishArray[i].move();
+        this.fishArray[i].move(); // update next position of fishes
     }
   }
-  ///
   clearCanvas(){
     this.image.clearRect(0, 0, 800,800);
   }
