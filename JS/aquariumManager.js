@@ -52,7 +52,9 @@ class aquariumManager {
         fish.y,
         fish.w,
         fish.h)
+        fish.newRandomDirection();
         fish.move(); // update next position of fishes
+        
     }
   }
   clearCanvas(){

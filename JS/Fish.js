@@ -13,15 +13,18 @@ class Fish {
     }
   }
   newRandomDirection() {
-    let angle = this.randomAngle();
-    this.direction.y = -Math.cos(angle);
-    this.direction.x = Math.sin(angle);
+    this.angle += (Math.random()*0.5-0.25);
+    this.direction.y = -Math.cos(this.angle);
+    this.direction.x = Math.sin(this.angle);
   }
   reverseDirection(axis){
     if(axis === "x"){
       this.direction.x = - this.direction.x
+      this.angle -= Math.PI
     }else{
       this.direction.y = - this.direction.y
+      this.angle -= Math.PI
+
     }
   }
   move() {
