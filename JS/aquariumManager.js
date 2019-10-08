@@ -1,11 +1,20 @@
 class aquariumManager {
   constructor() {
     this.fishArray = [];
-    this.colors = {
-      "red": "#FF0000",
-      "blue": "#0000FF",
-      "yellow": "#FFFF00"
-    }
+    this.colors = [
+      "red",
+      "blue",
+      "yellow",
+      "olive",
+      "green",
+      "orange",
+      "purple",
+      "lime",
+      "teal",
+      "silver",
+      "white:"
+    ]
+
     this.playScreen = document.getElementById("aquarium-screen");
     this.image = this.playScreen.getContext("2d");
     this.tempMousePos;
@@ -35,7 +44,7 @@ class aquariumManager {
   }
   generateFish() {
     if(this.tempMousePos.y <= 700){ // generate fish only in the upper side of the canvas
-      this.fishArray.push(new Fish(this.tempMousePos.x-this.bounds.x-7.5, this.tempMousePos.y-this.bounds.y-7.5, 15, 15, this.colors["red"]))
+      this.fishArray.push(new Fish(this.tempMousePos.x-this.bounds.x-7.5, this.tempMousePos.y-this.bounds.y-7.5, 15, 15, this.colors[Math.floor(Math.random()*this.colors.length)]))
       console.log(this.fishArray)
     }
   }
@@ -46,7 +55,7 @@ class aquariumManager {
   drawAllFishes(){ // as rectangle shapes
     for(let fish of this.fishArray){
       this.checkAquariumCollision(fish)
-      this.image.fillStyle = fish.colors;
+      this.image.fillStyle = fish.color;
       this.image.fillRect(
         fish.x,
         fish.y,
