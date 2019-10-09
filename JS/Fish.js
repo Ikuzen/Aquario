@@ -21,10 +21,8 @@ class Fish {
   }
   reverseDirection(axis){
     if(axis === "x"){
-      this.direction.x = - this.direction.x
       this.angle -= Math.PI
     }else{
-      this.direction.y = - this.direction.y
       this.angle -= Math.PI
     }
   }
