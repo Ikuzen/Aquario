@@ -7,6 +7,8 @@ class Fish {
     this.h = h;
     this.color = color;
     this.angle = this.randomAngle()
+    this.isFollowing = false;
+    this.followFish = null;
     this.direction = {
       x: Math.sin(this.angle),
       y: -Math.cos(this.angle),
@@ -24,7 +26,6 @@ class Fish {
     }else{
       this.direction.y = - this.direction.y
       this.angle -= Math.PI
-
     }
   }
   move() {
