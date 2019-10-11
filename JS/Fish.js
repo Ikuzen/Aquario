@@ -8,7 +8,9 @@ class Fish {
     this.color = color;
     this.angle = this.randomAngle()
     this.isFollowing = false;
-    this.followFish = null;
+    this.isFollowed = false;
+    this.followFish = null; // Fish object that is being followed
+    this.fishToFollow = null // stores the fish to follow, in order to be checked
     this.direction = {
       x: Math.sin(this.angle),
       y: -Math.cos(this.angle),
@@ -21,10 +23,8 @@ class Fish {
   }
   reverseDirection(axis){
     if(axis === "x"){
-      this.direction.x = - this.direction.x
       this.angle -= Math.PI
     }else{
-      this.direction.y = - this.direction.y
       this.angle -= Math.PI
     }
   }

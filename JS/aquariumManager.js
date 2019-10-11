@@ -63,6 +63,7 @@ class aquariumManager {
       }
       this.checkRangeFish(fish);
       fish.move();
+      this.checkAquariumCollision(fish);
       this.drawFish(fish);
     }
 
@@ -71,7 +72,6 @@ class aquariumManager {
   /// Display functions
   ///
   drawFish(fish) {
-    this.checkAquariumCollision(fish)
     this.image.fillStyle = fish.color;
     this.image.fillRect(
       fish.x,
@@ -107,12 +107,33 @@ class aquariumManager {
 
   checkRangeFish(fish) {
     for (let i = 0; i < this.fishArray.length && !fish.isFollowing; i++) { // checks if fishes are not following/being following first
-      if (fish !== this.fishArray[i] && !this.fishArray[i].isFollowing && this.fishArray.length >1 && this.distanceAB(fish, this.fishArray[i]) <= 20){
+      if (fish !== this.fishArray[i] &&
+        this.fishArray.length > 1 &&
+        this.fishArray[i].followFish !== fish &&
+        this.distanceAB(fish, this.fishArray[i]) <= 20 &&
+        !this.checkCircularFollowing(fish,this.fishArray[i] ,this.fishArray[i])) {
         fish.isFollowing = true;
         fish.followFish = this.fishArray[i];
         break;
       }
     }
 
+  }
+  checkCircularFollowing(fishA, fishB, fishBToFollow = false) {
+    if (fishBToFollow) {
+      fishA.fishToFollow = fishBToFollow;
+    }
+    if (fishA.fishToFollow) {
+      if (fishB.isFollowing) {
+        if (fishB.followFish === fishA.fishToFollow) { // checks is
+          return true
+        } else {
+          return this.checkCircularFollowing(fishA, fishB.followFish);
+        }
+      } else {
+        fishA.fishToFollow = null;
+        return false
+      }
+    }
   }
 }
