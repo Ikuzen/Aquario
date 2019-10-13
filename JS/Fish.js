@@ -9,7 +9,9 @@ class Fish {
     this.angle = this.randomAngle()
     this.isFollowing = false;
     this.isFollowed = false;
+    this.followedBy = null;
     this.followFish = null; // Fish object that is being followed
+    
     this.fishToFollow = null // stores the fish to follow, in order to be checked
     this.direction = {
       x: Math.sin(this.angle),
