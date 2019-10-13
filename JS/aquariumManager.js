@@ -112,9 +112,11 @@ class aquariumManager {
         this.fishArray[i].followFish !== fish &&
         this.distanceAB(fish, this.fishArray[i]) <= 20 &&
         !this.checkCircularFollowing(fish,this.fishArray[i] ,this.fishArray[i])) {
-        fish.isFollowing = true;
-        fish.followFish = this.fishArray[i];
-        break;
+          fish.isFollowing = true;
+          this.fishArray[i].isFollowed = true;
+          this.fishArray[i].followedBy = fish;
+          fish.followFish = this.fishArray[i];
+          break;
       }
     }
 
@@ -123,10 +125,9 @@ class aquariumManager {
     if (fishBToFollow) {
       fishA.fishToFollow = fishBToFollow;
     }
-    if (fishA.fishToFollow) {
       if (fishB.isFollowing) {
-        if (fishB.followFish === fishA.fishToFollow) { // checks is
-          return true
+        if (fishB.followFish === fishA.fishToFollow || fishB.followFish === fishA.followedBy) { // checks is
+          return true;
         } else {
           return this.checkCircularFollowing(fishA, fishB.followFish);
         }
@@ -135,5 +136,4 @@ class aquariumManager {
         return false
       }
     }
-  }
 }
