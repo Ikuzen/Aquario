@@ -136,7 +136,10 @@ class aquariumManager {
     }
 
   }
-  checkCircularFollowing(fishA, fishB, fishBToFollow = false) {
+  checkCircularFollowing(fishA, fishB, fishBToFollow = false, stackLimit=0,) {
+    if(stackLimit >= this.fishArray.length){ // to avoid stackOverflow
+      return true;
+    }
     if (fishBToFollow) {
       fishA.fishToFollow = fishBToFollow;
     }
@@ -144,7 +147,7 @@ class aquariumManager {
       if (fishB.followFish === fishA.fishToFollow || fishB.followFish === fishA.followedBy) { // checks is
         return true;
       } else {
-        return this.checkCircularFollowing(fishA, fishB.followFish);
+        return this.checkCircularFollowing(fishA, fishB.followFish,false,++stackLimit);
       }
     } else {
       fishA.fishToFollow = null;
