@@ -60,11 +60,13 @@ class aquariumManager {
         fish.newRandomDirection(); // if not following -> random direction;
       } else {
         fish.direction = fish.followFish.direction // if following -> same direction as other fish
+        fish.angle = fish.followFish.angle
       }
       this.checkRangeFish(fish);
       fish.move();
       this.checkAquariumCollision(fish);
       this.drawFish(fish);
+
     }
 
   }
@@ -73,15 +75,28 @@ class aquariumManager {
   ///
   drawFish(fish) {
     this.image.fillStyle = fish.color;
+    this.image.save()
+    if(fish.angle !== fish.previousAngle){
+      this.image.translate(fish.x+0.5*15,fish.y+0.5*15)
+      this.image.rotate(fish.angle)
+      this.image.translate(-(fish.x+0.5*15),-(fish.y+0.5*15))
+      fish.previousAngle = fish.angle;
+    }
+    
     this.image.fillRect(
       fish.x,
       fish.y,
       fish.w,
-      fish.h)
+      fish.h
+      )
+      this.image.restore()
+      // this.image.rotate(-fish.angle)
+
+
   }
 
   clearCanvas() {
-    this.image.clearRect(0, 0, 800, 800);
+    this.image.clearRect(0, 0, 10000, 10000);
   }
 
   destroyFishes() {

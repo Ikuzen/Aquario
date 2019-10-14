@@ -6,13 +6,14 @@ class Fish {
     this.w = w;
     this.h = h;
     this.color = color;
-    this.angle = this.randomAngle()
     this.isFollowing = false;
     this.isFollowed = false;
     this.followedBy = null;
     this.followFish = null; // Fish object that is being followed
     
     this.fishToFollow = null // stores the fish to follow, in order to be checked
+    this.angle = this.randomAngle()
+    this.previousAngle = this.angle;
     this.direction = {
       x: Math.sin(this.angle),
       y: -Math.cos(this.angle),
@@ -27,7 +28,7 @@ class Fish {
     if(axis === "x"){
       this.angle -= Math.PI
     }else{
-      this.angle -= Math.PI
+      this.angle += Math.PI
     }
   }
   move() {
